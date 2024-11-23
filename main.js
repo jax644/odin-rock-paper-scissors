@@ -1,87 +1,82 @@
-// Add functionality so that when the user clicks a button, they play a round with that choice
+// Add functionality to the player choice buttons in the DOM
+// When the player clicks a button, they start a round with the corresponding choice
+
+const playRock = () => playRound('rock', getComputerChoice())
+const playPaper = () => playRound('paper', getComputerChoice())
+const playScissors = () => playRound('scissors', getComputerChoice())
+
 document.getElementById('rock').addEventListener('click', playRock)
 document.getElementById('paper').addEventListener('click', playPaper)
 document.getElementById('scissors').addEventListener('click', playScissors)
 
+// Start the human and computer scores at zero
+let humanScore = 0
+let computerScore = 0
 
-function playRock () {
-    playRound('rock',getComputerChoice())
+// Simulate one round and display results in the DOM
+function playRound (humanChoice,computerChoice) {
+    // Create a shortcut for selecting the 'resultsDiv' div as it will be frequently reused
+    const resultsDiv = document.getElementById('resultsDiv')
+
+    // Handle human win
+    if (humanChoice === 'rock' && computerChoice === 'scissors' ||
+        humanChoice === 'paper' && computerChoice === 'rock' ||
+        humanChoice === 'scissors' && computerChoice === 'paper'
+    ) {
+        // Create human win message and display it in the 'resultsDiv' div
+        let humanWinsMessage = document.createElement('p')
+        humanWinsMessage.innerText = `You win! ${humanChoice} beats ${computerChoice}`
+        resultsDiv.appendChild(humanWinsMessage)
+        
+        // Increment the human score and update the human score in the DOM
+        humanScore += 1
+        document.getElementById('humanScoreSpan').innerText = `${humanScore}`
+
+    // Handle draw 
+    } else if (humanChoice === computerChoice) {
+        // Create draw message and display it in the 'resultsDiv' div
+        let drawMessage = document.createElement('p')
+        drawMessage.innerText = `It's a draw! You both chose ${humanChoice}`
+        resultsDiv.appendChild(drawMessage)
+
+    // Handle computer win
+    } else {
+        // Create a human loss message and display it in the 'resultsDiv' div
+        let computerWinsMessage = document.createElement('p')
+        computerWinsMessage.innerText = `You lose! ${computerChoice} beats ${humanChoice}`
+        resultsDiv.appendChild(computerWinsMessage)
+        
+        // Increment the computer score and update the computer score in the DOM
+        computerScore += 1
+        document.getElementById('computerScoreSpan').innerText = `${computerScore}`
+    }
+
+    // Handle human or computer reaching the winning score
+    // Display a message in the winner span
+    const winningScore = 5
+
+    if (humanScore === winningScore) {
+        document.getElementById('winnerSpan').innerText = `Game over!  You win!`
+    }
+
+    if (computerScore === winningScore) {
+        document.getElementById('winnerSpan').innerText = `Game over!  Computer wins!`
+    }
 }
 
-function playPaper () {
-    playRound('paper',getComputerChoice())
-}
+// Generate a random choice for the computer
 
-function playScissors () {
-    playRound('scissors',getComputerChoice())
-}
-
-
-// Generate a random choice between rock, paper, and scissors
 function getComputerChoice () {
-    // Generate a pseudo-random number between 0 and 1
+
     let randomNumber = Math.random()
 
-    // Set up a conditional statement that has an equal likelihood of returning rock, paper, or scissors
     if (randomNumber < .33) {
         return "rock"
-    } else if (randomNumber <.66) {
+    } 
+    else if (randomNumber <.66) {
         return "paper"
-    } else {
+    } 
+    else {
         return "scissors"
     }
 }
-
-// Get a choice from the user
-function getHumanChoice () {
-    // Prompt the user for a choice
-    let humanChoice = prompt('rock, paper, or scissors?','')
-
-    // Validate the user's input and prompt them again if the input is invalid
-    if (humanChoice != 'rock' && humanChoice != 'paper' && humanChoice != 'scissors') {
-        humanChoice = prompt('invalid input; please try again','')
-    }
-   
-    return humanChoice
-}
-
-    // Store the human score and computer score
-
-    let humanScore = 0
-    let computerScore = 0
-
-    // Play a single round
-
-    function playRound (humanChoice,computerChoice) {
-
-        if (humanChoice === 'rock' && computerChoice === 'scissors' ||
-            humanChoice === 'paper' && computerChoice === 'rock' ||
-            humanChoice === 'scissors' && computerChoice === 'paper'
-        ) {
-            let humanWinsMessage = document.createElement('p')
-            humanWinsMessage.innerText = `You win! ${humanChoice} beats ${computerChoice}`
-            document.getElementById('placeForResults').appendChild(humanWinsMessage)
-
-            humanScore += 1
-            document.getElementById('placeForHumanScore').innerText = `${humanScore}`
-        } else if (humanChoice === computerChoice) {
-            let drawMessage = document.createElement('p')
-            drawMessage.innerText = `It's a draw! You both chose ${humanChoice}`
-            document.getElementById('placeForResults').appendChild(drawMessage)
-        } else {
-            let computerWinsMessage = document.createElement('p')
-            computerWinsMessage.innerText = `You lose! ${computerChoice} beats ${humanChoice}`
-            document.getElementById('placeForResults').appendChild(computerWinsMessage)
-
-            computerScore += 1
-            document.getElementById('placeForComputerScore').innerText = `${computerScore}`
-        }
-
-        if (humanScore === 5) {
-            document.getElementById('placeForWinner').innerText = `Game over!  You win!`
-        }
-
-        if (computerScore === 5) {
-            document.getElementById('placeForWinner').innerText = `Game over!  Computer wins!`
-        }
-    }
