@@ -1,3 +1,22 @@
+// Add functionality so that when the user clicks a button, they play a round with that choice
+document.getElementById('rock').addEventListener('click', playRock)
+document.getElementById('paper').addEventListener('click', playPaper)
+document.getElementById('scissors').addEventListener('click', playScissors)
+
+
+function playRock () {
+    playRound('rock',getComputerChoice())
+}
+
+function playPaper () {
+    playRound('paper',getComputerChoice())
+}
+
+function playScissors () {
+    playRound('scissors',getComputerChoice())
+}
+
+
 // Generate a random choice between rock, paper, and scissors
 function getComputerChoice () {
     // Generate a pseudo-random number between 0 and 1
@@ -26,12 +45,6 @@ function getHumanChoice () {
     return humanChoice
 }
 
-
-
-// Simulate 5 rounds
-
-function playGame () {
-
     // Store the human score and computer score
 
     let humanScore = 0
@@ -40,8 +53,6 @@ function playGame () {
     // Play a single round
 
     function playRound (humanChoice,computerChoice) {
-        humanChoice = humanChoice.toLowerCase()
-        computerChoice = computerChoice.toLowerCase()
 
         if (humanChoice === 'rock' && computerChoice === 'scissors' ||
             humanChoice === 'paper' && computerChoice === 'rock' ||
@@ -56,20 +67,3 @@ function playGame () {
             computerScore += 1
         }
     }
-
-    // Set up counter and looping function to play the desired number of rounds
-
-    let roundsToPlay = 5
-    let roundsPlayed = 0
-
-    while (roundsPlayed < roundsToPlay) {
-        playRound(getHumanChoice(),getComputerChoice());
-        roundsPlayed += 1
-    }
-
-    // Print the score to the console after the last round
-    console.log(`Final score:\nHuman:${humanScore}\nComputer:${computerScore}`)
-
-}
-
-playGame()
