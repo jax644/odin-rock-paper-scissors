@@ -61,7 +61,9 @@ function getHumanChoice () {
             let humanWinsMessage = document.createElement('p')
             humanWinsMessage.innerText = `You win! ${humanChoice} beats ${computerChoice}`
             document.getElementById('placeForResults').appendChild(humanWinsMessage)
+
             humanScore += 1
+            document.getElementById('placeForHumanScore').innerText = `${humanScore}`
         } else if (humanChoice === computerChoice) {
             let drawMessage = document.createElement('p')
             drawMessage.innerText = `It's a draw! You both chose ${humanChoice}`
@@ -70,6 +72,8 @@ function getHumanChoice () {
             let computerWinsMessage = document.createElement('p')
             computerWinsMessage.innerText = `You lose! ${computerChoice} beats ${humanChoice}`
             document.getElementById('placeForResults').appendChild(computerWinsMessage)
+
             computerScore += 1
+            document.getElementById('placeForComputerScore').innerText = `${computerScore}`
         }
     }
