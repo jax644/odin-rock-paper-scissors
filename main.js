@@ -76,4 +76,12 @@ function getHumanChoice () {
             computerScore += 1
             document.getElementById('placeForComputerScore').innerText = `${computerScore}`
         }
+
+        if (humanScore === 5) {
+            document.getElementById('placeForWinner').innerText = `Game over!  You win!`
+        }
+
+        if (computerScore === 5) {
+            document.getElementById('placeForWinner').innerText = `Game over!  Computer wins!`
+        }
     }
