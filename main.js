@@ -58,12 +58,18 @@ function getHumanChoice () {
             humanChoice === 'paper' && computerChoice === 'rock' ||
             humanChoice === 'scissors' && computerChoice === 'paper'
         ) {
-            console.log(`You win! ${humanChoice} beats ${computerChoice}`)
+            let humanWinsMessage = document.createElement('p')
+            humanWinsMessage.innerText = `You win! ${humanChoice} beats ${computerChoice}`
+            document.getElementById('placeForResults').appendChild(humanWinsMessage)
             humanScore += 1
         } else if (humanChoice === computerChoice) {
-            console.log(`It's a draw! You both chose ${humanChoice}`)
+            let drawMessage = document.createElement('p')
+            drawMessage.innerText = `It's a draw! You both chose ${humanChoice}`
+            document.getElementById('placeForResults').appendChild(drawMessage)
         } else {
-            console.log(`You lose! ${computerChoice} beats ${humanChoice}`)
+            let computerWinsMessage = document.createElement('p')
+            computerWinsMessage.innerText = `You lose! ${computerChoice} beats ${humanChoice}`
+            document.getElementById('placeForResults').appendChild(computerWinsMessage)
             computerScore += 1
         }
     }
