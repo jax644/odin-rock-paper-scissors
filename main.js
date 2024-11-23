@@ -25,3 +25,9 @@ function getHumanChoice () {
    
     return humanChoice
 }
+
+// Store the human score and computer score
+
+let humanScore = 0
+let computerScore = 0
+
