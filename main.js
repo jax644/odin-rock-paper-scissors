@@ -26,27 +26,50 @@ function getHumanChoice () {
     return humanChoice
 }
 
-// Store the human score and computer score
 
-let humanScore = 0
-let computerScore = 0
 
-// Play a single round
+// Simulate 5 rounds
 
-function playRound (humanChoice,computerChoice) {
-    humanChoice = humanChoice.toLowerCase()
-    computerChoice = computerChoice.toLowerCase()
+function playGame () {
 
-    if (humanChoice === 'rock' && computerChoice === 'scissors' ||
-        humanChoice === 'paper' && computerChoice === 'rock' ||
-        humanChoice === 'scissors' && computerChoice === 'paper'
-    ) {
-        console.log(`You win! ${humanChoice} beats ${computerChoice}`)
-        humanScore += 1
-    } else if (humanChoice === computerChoice) {
-        console.log(`It's a draw! You both chose ${humanChoice}`)
-    } else {
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}`)
-        computerScore += 1
+    // Store the human score and computer score
+
+    let humanScore = 0
+    let computerScore = 0
+
+    // Play a single round
+
+    function playRound (humanChoice,computerChoice) {
+        humanChoice = humanChoice.toLowerCase()
+        computerChoice = computerChoice.toLowerCase()
+
+        if (humanChoice === 'rock' && computerChoice === 'scissors' ||
+            humanChoice === 'paper' && computerChoice === 'rock' ||
+            humanChoice === 'scissors' && computerChoice === 'paper'
+        ) {
+            console.log(`You win! ${humanChoice} beats ${computerChoice}`)
+            humanScore += 1
+        } else if (humanChoice === computerChoice) {
+            console.log(`It's a draw! You both chose ${humanChoice}`)
+        } else {
+            console.log(`You lose! ${computerChoice} beats ${humanChoice}`)
+            computerScore += 1
+        }
     }
+
+    // Set up counter and looping function to play the desired number of rounds
+
+    let roundsToPlay = 5
+    let roundsPlayed = 0
+
+    while (roundsPlayed < roundsToPlay) {
+        playRound(getHumanChoice(),getComputerChoice());
+        roundsPlayed += 1
+    }
+
+    // Print the score to the console after the last round
+    console.log(`Final score:\nHuman:${humanScore}\nComputer:${computerScore}`)
+
 }
+
+playGame()
